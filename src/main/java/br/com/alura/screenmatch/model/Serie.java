@@ -21,8 +21,8 @@ public class Serie {
     private String poster;
     private String sinopse;
 
-    @OneToMany(mappedBy = "serie")
-    private List<Episodio> episodios = new ArrayList<>();
+    @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL)
+    private List<Episodios> episodios = new ArrayList<>();
 
     public Serie() {}
 
@@ -45,11 +45,12 @@ public class Serie {
         this.id = id;
     }
 
-    public List<Episodio> getEpisodios() {
+    public List<Episodios> getEpisodios() {
         return episodios;
     }
 
-    public void setEpisodios(List<Episodio> episodios) {
+    public void setEpisodios(List<Episodios> episodios) {
+        episodios.forEach(e -> e.setSerie(this));
         this.episodios = episodios;
     }
 

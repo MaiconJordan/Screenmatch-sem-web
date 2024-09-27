@@ -1,14 +1,13 @@
 package br.com.alura.screenmatch.model;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import jakarta.persistence.*;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 @Entity
-public class Episodio {
+@Table(name = "episodios")
+public class Episodios {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,7 +19,25 @@ public class Episodio {
     @ManyToOne
     private Serie serie;
 
-    public Episodio(Integer numeroTemporada, DadosEpisodio dadosEpisodio){
+    public Episodios(){}
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Serie getSerie() {
+        return serie;
+    }
+
+    public void setSerie(Serie serie) {
+        this.serie = serie;
+    }
+
+    public Episodios(Integer numeroTemporada, DadosEpisodio dadosEpisodio){
         this.temporada = numeroTemporada;
         this.titulo = dadosEpisodio.titulo();
         this.numeroEpisodio = dadosEpisodio.numero();
